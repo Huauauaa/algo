@@ -1,19 +1,24 @@
-name: GitHub Actions blog
+name: github pages
+
 on:
   push:
-    branches:
-      - main
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@master
+    branches: [main]
+  pull_request:
+    branches: [main]
 
-      - name: Build and Deploy
-        uses: JamesIves/github-pages-deploy-action@master
-        env:
-          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
-          BRANCH: gh-pages
-          FOLDER: .vuepress/dist
-          BUILD_SCRIPT: npm install && npm run docs:build
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - run: npm install
+      - run: npm run docs:build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/vitepress/dist
