@@ -1,0 +1,15 @@
+{
+  "name": "algo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run docs:dev -- --host",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "vitepress": "^1.0.0-alpha.1"
+  }
+}
