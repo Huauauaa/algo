@@ -1,8 +1,3 @@
-# 排列组合
-
-## 全排列
-
-```js
 function arrange(arr, result, count = 0, temp = []) {
   for (const item of arr) {
     if (temp.length === arr.length - 1) {
@@ -22,4 +17,3 @@ export default function permutation(arr) {
   arrange(arr, result);
   return result;
 }
-```
